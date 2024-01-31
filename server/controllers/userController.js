@@ -124,7 +124,8 @@ class UserController {
         const secretKey = process.env.JWTkey;
         const token = jwt.sign({ 
           id: user._id, 
-          email: user.email 
+          email: user.email,
+          name: user.name,
         }, 
         secretKey,
         { expiresIn: "12h" }

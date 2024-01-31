@@ -68,7 +68,7 @@ const Suggestions = () => {
                         <h1 className='text-3xl font-bold'>No Suggestions Found :(</h1>
                         {/* <p>You have not made any suggestions yet!</p> */}
                     </div>)
-                    : (<div className='w-full'>
+                    : (<div className='w-full mt-8'>
                         {suggestions.reverse().map((suggestion, index) => (
                             <Accordion>
                                 <AccordionSummary

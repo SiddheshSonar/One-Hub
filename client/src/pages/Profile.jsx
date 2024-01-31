@@ -26,4 +26,4 @@ function Profile() {
   );
 }
 
-export default ProfileDetails;
+export default Profile;
