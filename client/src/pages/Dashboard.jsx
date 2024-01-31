@@ -77,7 +77,9 @@ const LikesAndDislikesChart = ({ data }) => {
 const Dashboard = () => {
   const [data, setData] = useState(insights);
   const [app, setApp] = useState('Instagram');
-  const [impInsight, setImpInsight] = useState('');
+  const token = localStorage.getItem('token');
+  // const userInfo 
+
 
   const handleChange = (event) => {
     setApp(event.target.value);

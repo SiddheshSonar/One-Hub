@@ -23,6 +23,7 @@
     "framer-motion": "^11.0.3",
     "hamburger-react": "^2.5.0",
     "jodit-react": "^4.0.9",
+    "jwt-decode": "^4.0.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.3",
     "mui-one-time-password-input": "^2.0.0",

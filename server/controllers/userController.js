@@ -209,6 +209,7 @@ class UserController {
         max_tokens: 100,
       });
       const suggestion = response.data.choices[0].text;
+      console.log(suggestion)
       const date = new Date();
       const newSuggestion = {
         date,
