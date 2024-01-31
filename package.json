@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-quill": "^2.0.0",
+    "react-tsparticles": "^2.12.2"
+  }
+}
