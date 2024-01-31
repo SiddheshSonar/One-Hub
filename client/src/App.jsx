@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import { NavBar } from "./components/NavBar";
+import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
@@ -63,7 +63,8 @@ function App() {
         {
           path: '/blog/:id',
           element: <Blog />
-        }
+        },
+
       ]
     }
   ]);

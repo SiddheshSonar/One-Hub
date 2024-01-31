@@ -1,236 +1,168 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useMotionValue, motion, useSpring, useTransform, useCycle } from "framer-motion";
-import { FiArrowRight } from "react-icons/fi";
-import { useDispatch, useSelector } from "react-redux";
-import { toggleNavBar, setNavBar } from "../redux/features/uislice";
-import { Sling as Hamburger } from 'hamburger-react';
-import logo from '../assets/logo-hck.svg';
-import { useNavigate } from "react-router-dom";
-import Center from "../animated-components/Center";
+import { Fragment, useEffect } from 'react'
+import { useState } from 'react'
+import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import logo from '../assets/logo-hck.svg'
 
-export const NavBar = () => {
-    const token = localStorage.getItem('token');
-    const [currPath, setCurrPath] = useState(window.location.pathname)
-    const [currWidth, setCurrWidth] = useState(window.innerWidth)
-    const navigate = useNavigate()
-    const isNavBarOpen = useSelector(state => state.ui.isNavBarOpen)
-    const dispatch = useDispatch()
+const navigation = [
+    { name: 'Home', href: '/home', current: false },
+    { name: 'Uploads', href: '/uploads', current: false },
+    { name: 'Dashboard', href: '/dashboard', current: true },
+    { name: 'Suggestions', href: '/suggestions', current: false },
+    { name: 'Blog', href: '/blog', current: false },
+]
 
-    useEffect(() => {
-        // console.log(currPath)
-        setCurrPath(window.location.pathname)
-    }, [currPath, window.location.pathname])
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
+
+function NavBar() {
+    const [path, setPath] = useState(window.location.pathname)
 
     useEffect(() => {
-        console.log(isNavBarOpen)
-    }, [isNavBarOpen])
+        setPath(window.location.pathname)
+    }, [window.location.pathname])
 
-    return (
+  return (
+    <Disclosure as="nav" className="bg-gray ">
+      {({ open }) => (
         <>
-            <Center>
-                <button
-                    onClick={() => {
-                        navigate('/')
-                        dispatch(setNavBar(false))
-                    }}
-                    style={{
-                        display: (isNavBarOpen) ? "block" : "none",
-                    }}     
-                className="fixed top-0 left-4">
-                    <img src={logo} alt="" className="w-48" />
-                </button>
-            </Center>
-                <div className={`fixed top-4 right-4 bg-white bg-opacity-10 rounded-full ${currWidth > 400 ? "p-2" : "p-0"} hover:bg-opacity-25 z-50`}>
-                    <Hamburger rounded duration={0.5} size={currWidth < 768 ? 20 : 25} easing="ease-in" color="#C77DFF" toggled={isNavBarOpen} toggle={() => dispatch(toggleNavBar())} />
+          <div className="mx-auto px-2 sm:px-6 lg:px-16">
+            <div className="relative flex h-16 items-center justify-between">
+              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                {/* Mobile menu button*/}
+                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <span className="absolute -inset-0.5" />
+                  <span className="sr-only">Open main menu</span>
+                  {open ? (
+                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                  ) : (
+                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                  )}
+                </Disclosure.Button>
+              </div>
+              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                <div className="flex flex-shrink-0 items-center">
+                  <img
+                    className="h-8 w-auto"
+                    src={logo}
+                    // src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    alt="Your Company"
+                  />
+                  <span className='font-bold text-white  tracking-wide ml-2 text-xl'>
+                    One Hub
+                  </span>
                 </div>
-            <motion.div
-                style={{
-                    display: isNavBarOpen ? "block" : "none",
-                }}
-                animate={{
-                    width: isNavBarOpen ? "100%" : "0%",
-                    // width: "100%",
-                    display: isNavBarOpen ? "block" : "none",
-                    opacity: isNavBarOpen ? 1 : 0,
-                    left: isNavBarOpen ? "0px" : "100%",
-
-                    transition: {
-                        duration: 1,
-                        type: "spring",
-                        damping: 30,
-                        stiffness: 150,
-                    },
-                }}
-                className="bg-black bg-opacity-95 p-4 md:p-8 w-full">
-                <motion.div
-                    variants={{
-                        hidden: {
-                            opacity: 0,
-                            x: -200,
-                            // y: -200,
-                        },
-                        visible: {
-                            opacity: 1,
-                            x: 0,
-                            // y: 0,
-                        },
-                    }}
-                    transition={{
-                        duration: 0.75,
-                        delay: 0.2,
-                        ease: 'easeIn',
-                    }}
-                    // initial="hidden"
-                    // animate="visible"
-                    // exit="hidden"
-                    className="container mx-auto max-w-5xl">
-                    <Link
-                        heading="Events"
-                        subheading="Learn what we do here"
-                        imgSrc="/about.webp"
-                        href="/events"
-                    />
-                    <Link
-                        heading="Sponsors"
-                        subheading="We work with great people"
-                        imgSrc="/sponsors.webp"
-                        href="/sponsors"
-                    />
-                    <Link
-                        heading="Contact"
-                        subheading="Get in touch with us"
-                        imgSrc="/contact.webp"
-                        href="/contact"
-                    />
-                    <Link
-                        heading="Schedule"
-                        subheading="See what's coming up"
-                        imgSrc="/schedule.webp"
-                        href="/schedule"
-                    />
-                    <Link
-                        heading="Donations"
-                        subheading="Donate for a good cause"
-                        imgSrc="/donation.webp"
-                        href="/donation"
-                    />
-                    <Link
-                        heading="Login"
-                        subheading="Get Started"
-                        imgSrc="/login.webp"
-                        href="/login"
-                    />
-                </motion.div>
-            </motion.div>
-        </>
-    )
-
-
-};
-
-const Link = ({ heading, imgSrc, subheading, href }) => {
-    const ref = useRef(null);
-
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-
-    const mouseXSpring = useSpring(x);
-    const mouseYSpring = useSpring(y);
-
-    const top = useTransform(mouseYSpring, [0.5, -0.5], ["40%", "60%"]);
-    const left = useTransform(mouseXSpring, [0.5, -0.5], ["60%", "70%"]);
-
-    const handleMouseMove = (e) => {
-        const rect = ref.current.getBoundingClientRect();
-
-        const width = rect.width;
-        const height = rect.height;
-
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-
-        const xPct = mouseX / width - 0.5;
-        const yPct = mouseY / height - 0.5;
-
-        x.set(xPct);
-        y.set(yPct);
-    };
-
-    return (
-        <motion.a
-            href={href}
-            ref={ref}
-            onMouseMove={handleMouseMove}
-            initial="initial"
-            whileHover="whileHover"
-            exit={{ opacity: 0 }}
-            className="group relative flex items-center justify-between border-b-2 border-neutral-700 py-4 transition-colors duration-500 hover:border-neutral-50 md:py-8 text-white"
-        >
-            <div>
-                <motion.span
-                    variants={{
-                        initial: { x: 0 },
-                        whileHover: { x: -16 },
-                    }}
-                    transition={{
-                        type: "spring",
-                        staggerChildren: 0.075,
-                        delayChildren: 0.25,
-                    }}
-                    className="relative z-10 block text-2xl font-bold text-neutral-500 transition-colors duration-500 group-hover:text-neutral-50 md:text-6xl"
-                >
-                    {heading.split("").map((l, i) => (
-                        <motion.span
-                            variants={{
-                                initial: { x: 0 },
-                                whileHover: { x: 16 },
-                            }}
-                            transition={{ type: "spring" }}
-                            className="inline-block"
-                            key={i}
-                        >
-                            {l}
-                        </motion.span>
+                <div className="hidden sm:ml-6 sm:block">
+                  <div className="flex space-x-4">
+                    {navigation.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        className={classNames(
+                          item.href === path ? 'bg-gray-900 underline font-bold' : ' hover:underline',
+                          'rounded-md px-3 py-2 text-sm text-white'
+                        )}
+                        aria-current={item.current ? 'page' : undefined}
+                      >
+                        {item.name}
+                      </a>
                     ))}
-                </motion.span>
-                <span className="relative z-10 mt-2 block text-base text-neutral-500 transition-colors duration-500 group-hover:text-neutral-50">
-                    {subheading}
-                </span>
+                  </div>
+                </div>
+              </div>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <button
+                  type="button"
+                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                >
+                  <span className="absolute -inset-1.5" />
+                  <span className="sr-only">View notifications</span>
+                  <BellIcon className="h-6 w-6" aria-hidden="true" />
+                </button>
+
+                {/* Profile dropdown */}
+                <Menu as="div" className="relative ml-3">
+                  <div>
+                    <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                      <span className="absolute -inset-1.5" />
+                      <span className="sr-only">Open user menu</span>
+                      <img
+                        className="h-8 w-8 rounded-full"
+                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        alt=""
+                      />
+                    </Menu.Button>
+                  </div>
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="#"
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          >
+                            Your Profile
+                          </a>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="#"
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          >
+                            Settings
+                          </a>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="#"
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          >
+                            Sign out
+                          </a>
+                        )}
+                      </Menu.Item>
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
+              </div>
             </div>
+          </div>
 
-            <motion.img
-                style={{
-                    top,
-                    left,
-                    translateX: "-50%",
-                    translateY: "-50%",
-                }}
-                variants={{
-                    initial: { scale: 0, rotate: "-12.5deg" },
-                    whileHover: { scale: 1, rotate: "12.5deg" },
-                }}
-                transition={{ type: "spring" }}
-                src={imgSrc}
-                className="absolute z-0 h-24 w-32 rounded-lg object-cover md:h-48 md:w-64"
-                alt={`Image representing a link for ${heading}`}
-            />
+          <Disclosure.Panel className="sm:hidden">
+            <div className="space-y-1 px-2 pb-3 pt-2">
+              {navigation.map((item) => (
+                <Disclosure.Button
+                  key={item.name}
+                  as="a"
+                  href={item.href}
+                  className={classNames(
+                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                    'block rounded-md px-3 py-2 text-base font-medium'
+                  )}
+                  aria-current={item.current ? 'page' : undefined}
+                >
+                  {item.name}
+                </Disclosure.Button>
+              ))}
+            </div>
+          </Disclosure.Panel>
+        </>
+      )}
+    </Disclosure>
+  )
+}
 
-            <motion.div
-                variants={{
-                    initial: {
-                        x: "25%",
-                        opacity: 0,
-                    },
-                    whileHover: {
-                        x: "0%",
-                        opacity: 1,
-                    },
-                }}
-                transition={{ type: "spring" }}
-                className="relative z-10 p-4"
-            >
-                <FiArrowRight className="text-5xl text-neutral-50" />
-            </motion.div>
-        </motion.a>
-    );
-};
+export default NavBar

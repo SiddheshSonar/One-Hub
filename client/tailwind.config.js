@@ -23,6 +23,8 @@ export default {
       'skin': '#F2F597',
       'd-pink': '#ED5AB3',
       'l-pink': '#FF90C2',
+      'gray': '#2d3748',
+      'l-gray': '#E2E8F0',
     },
     extend: {},
   },

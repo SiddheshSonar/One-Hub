@@ -6,6 +6,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { toast } from 'react-toastify';
+import VerifyOtp from "../components/login/VerifyOtp";
+import Api from "../api";
 
 function Login() {
     const [loginInfo, setLoginInfo] = useState({ email: '', password: '' });
@@ -24,11 +27,71 @@ function Login() {
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
     const handleClickShowLoginPassword = () => setShowLoginPassword((show) => !show);
+    const [otp, setOtp] = useState('');
+    const [showOtp, setShowOtp] = useState(false);
+    const [btnName, setBtnName] = useState('Log In');
 
+    const handleSignup = async (e) => {
+        e.preventDefault();
+        console.log(signupInfo)
+        if (!signupInfo.name || !signupInfo.email || !signupInfo.password || !signupInfo.phone) {
+            toast.error('Please fill all the fields');
+            toggle(false);
+            return;
+        }
+        if (signupInfo.password !== confirmPassword) {
+            toast.error('Passwords do not match');
+            toggle(false);
+            return;
+        }
+        await Api.registerUser(signupInfo)
+            .then((res) => {
+                console.log(res)
+                toast.success('Account created successfully');
+                toggle(true);
+                setSignupInfo({
+                    name: '',
+                    email: '',
+                    password: '',
+                    phone: '',
+                });
+            })
+            .catch((err) => {
+                console.log(err)
+                toast.error(err.response.data.message);
+            })
+    }
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        console.log(loginInfo)
+        setBtnName('Logging In...');
+        if (!loginInfo.email || !loginInfo.password) {
+            toast.error('Please fill all the fields');
+            setBtnName('Log In');
+            toggle(true);
+            return;
+        }
+        await Api.loginUser(loginInfo)
+            .then((res) => {
+                console.log(res)
+                toast.success('OTP sent to your email!');
+                setShowOtp(true);
+                setBtnName('Log In');
+                toggle(true);
+            })
+            .catch((err) => {
+                console.log(err)
+                // console.log(err.response)
+                toast.error(err.response.data.message);
+                setBtnName('Log In');
+            })
+    }
 
 
     return (
         <div className="w-full h-full flex items-center justify-center">
+            <VerifyOtp open={showOtp} handleClose={() => setShowOtp(false)} email={loginInfo.email} setLoginInfo={setLoginInfo} />
             <Components.Container>
                 <Components.SignUpContainer signinIn={signIn}>
                     <Components.Form>
@@ -101,20 +164,23 @@ function Login() {
                                 }}
                                 onClick={handleClickShowConfirmPassword}
                             >
-                                {showConfirmPassword? <VisibilityOff sx={{ fontSize: '20px' }} /> : <Visibility sx={{ fontSize: '20px' }} />}
+                                {showConfirmPassword ? <VisibilityOff sx={{ fontSize: '20px' }} /> : <Visibility sx={{ fontSize: '20px' }} />}
                             </IconButton>
                         </div>
-                        <Components.Button style={{
-                            marginTop: '1rem'
-                        }}>Sign Up</Components.Button>
+                        <Components.Button
+                            onClick={handleSignup}
+                            style={{
+                                marginTop: '1rem'
+                            }}>Sign Up</Components.Button>
                     </Components.Form>
                 </Components.SignUpContainer>
 
                 <Components.SignInContainer signinIn={signIn}>
                     <Components.Form>
-                        <Components.Title style={{
-                            fontSize: '1.5rem'
-                        }}>Sign in</Components.Title>
+                        <Components.Title
+                            style={{
+                                fontSize: '1.5rem'
+                            }}>Sign in</Components.Title>
                         <TextField
                             id="outlined-basic"
                             label="Email"
@@ -130,7 +196,7 @@ function Login() {
                                 label="Password"
                                 variant="outlined"
                                 margin="normal"
-                                type={showPassword ? "text" : "password"}
+                                type={showLoginPassword ? "text" : "password"}
                                 value={loginInfo.password}
                                 onChange={(e) => setLoginInfo({ ...loginInfo, password: e.target.value })}
                             />
@@ -145,9 +211,11 @@ function Login() {
                                 {showLoginPassword ? <VisibilityOff /> : <Visibility />}
                             </IconButton>
                         </div>
-                        <Components.Button style={{
-                            marginTop: '1rem'
-                        }}>Log In</Components.Button>
+                        <Components.Button
+                            onClick={handleLogin}
+                            style={{
+                                marginTop: '1rem'
+                            }}>{btnName}</Components.Button>
                     </Components.Form>
                 </Components.SignInContainer>
 
