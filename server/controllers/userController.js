@@ -90,7 +90,7 @@ class UserController {
           refresh_token: ""
         },
       ];
-      const newUser = new User({ name, email, phone, password: passwordHash, socials: userSocials});
+      const newUser = new User({ name, email, phone, password: passwordHash, socials: userSocials, suggestion: []});
       await newUser.save();
       res.status(200).json({ message: "success" });
     } catch (error) {

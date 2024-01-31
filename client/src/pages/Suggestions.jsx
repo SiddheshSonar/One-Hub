@@ -12,6 +12,7 @@ import { CircularProgress } from '@mui/material';
 const Suggestions = () => {
     const [loading, setLoading] = useState(true);
     const [suggestions, setSuggestions] = useState([]);
+    const [hasNoSuggestions, setHasNoSuggestions] = useState(false); 
     const user = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
@@ -21,6 +22,12 @@ const Suggestions = () => {
             })
                 .then((res) => {
                     console.log(res.data);
+                    if (res.data.suggestion.length === 0) {
+                        setHasNoSuggestions(true);
+                    }
+                    else {
+                        setHasNoSuggestions(false);
+                    }
                     setSuggestions(res.data.suggestion);
                     setLoading(false);
                 })
@@ -56,7 +63,12 @@ const Suggestions = () => {
                         <h1 className='text-3xl font-bold'>Suggestions</h1>
                         <p>All your suggestions are stored here!</p>
                     </div>
-                    <div className='w-full'>
+                    {hasNoSuggestions ? 
+                    (<div className='w-full h-full flex flex-col items-center justify-center mt-16'>
+                        <h1 className='text-3xl font-bold'>No Suggestions Found :(</h1>
+                        {/* <p>You have not made any suggestions yet!</p> */}
+                    </div>)
+                    : (<div className='w-full'>
                         {suggestions.reverse().map((suggestion, index) => (
                             <Accordion>
                                 <AccordionSummary
@@ -74,7 +86,7 @@ const Suggestions = () => {
                                 </AccordionDetails>
                             </Accordion>
                         ))}
-                    </div>
+                    </div>)}
                     </Center>
                 </div>)}
         </div>
