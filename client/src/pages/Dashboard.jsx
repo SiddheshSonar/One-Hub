@@ -116,7 +116,7 @@ const Dashboard = () => {
                   </Select>
                 </FormControl>
               </div>
-              <div className='w-full'>
+              <div className='w-1/2 flex items-center justify-center'>
                 {/* <Alert severity="info">
                   <AlertTitle>Valuable Insight</AlertTitle>
                   This is an info Alert with an informative title.
