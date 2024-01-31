@@ -11,11 +11,13 @@ import Dashboard from "./pages/Dashboard";
 import Suggestions from "./pages/Suggestions";
 import BlogHome from "./pages/BlogHome";
 import Blog from "./pages/Blog";
+import Profile from "./pages/Profile";
 import Redirect from "./Redirect";
 import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./App.css";
+
 
 function App() {
   const token = localStorage.getItem('token');
@@ -85,6 +87,10 @@ function App() {
           path: '/AddBlog',
           element: <AddPage />
         },
+        {
+          path: '/profile',
+          element: <Profile />
+        }
       ]
     }
   ]);

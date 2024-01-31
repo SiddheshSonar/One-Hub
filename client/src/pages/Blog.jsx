@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { blogList } from '../components/blog/config/data';
+import Add from '../components/Add'
 
 export default function Blog() {
   const [id, setId] = useState(window.location.pathname.split('/')[2]);
@@ -31,3 +32,5 @@ export default function Blog() {
     </div>
   );
 }
+
+export default Blog

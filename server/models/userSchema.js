@@ -12,6 +12,12 @@ const socialsSchema = new mongoose.Schema({
   link: {
     type: String,
   },
+  token: {
+    type: String,
+  },
+  refresh_token: {
+    type: String,
+  },
 });
 
 const userSchema = new mongoose.Schema({

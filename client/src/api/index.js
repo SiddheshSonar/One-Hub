@@ -57,7 +57,14 @@ class Api {
     static async verifyOtp(data) {
         return await api.post('api/user/verify-otp', data);
     }
+    
+    static async sendTokentoBackend(data) {
+        return await api.post('api/user/send-token', data);
+    }
 
+    static async uploadYoutube(data) {
+        return await api.post('api/upload/youtube', data);
+    }
 }
 
 export default Api;
