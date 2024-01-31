@@ -1,51 +1,39 @@
+<<<<<<< HEAD
+import React, { useState, useEffect } from 'react';
+import Api from '../api';
+=======
 import React, { useState, useEffect, useRef } from 'react';
 import Button from '@mui/material/Button';
+>>>>>>> e0ee97950cc8a7aa2734b438d2962b14252fd5c3
 
-const ProfileDetails = () => {
-    // Sample user data (replace this with your actual data)
-    const [authorizationCode, setAuthorizationCode] = useState(null);
-    const [video, setVideo] = useState(null)
-    const fileInput = useRef(null)  
+function Profile() {
+  const [data, setData] = useState(null); // Initialize with null or an appropriate initial value
 
-    const [user] = useState({
-        firstName: 'John',
-        lastName: 'Doe',
-        username: 'johndoe',
-        email: 'john.doe@example.com',
-        youtubename: 'Funwave',
-        // Add more profile information as needed
-    });
-
-    const sendTokenToBackend = async (data) => {
-        await Api.sendTokentoBackend({ email: 'siddheshsonar3000@gmail.com', token: data, social: 'Youtube' })
-            .then((res) => {
-                console.log(res.data)
-                toast.success('Google Account Authorized Successfully!')
-            })
-            .catch(err => {
-                console.log(err)
-            })
+  useEffect(() => {
+    // Access local storage here and update state
+    const storedData = localStorage.getItem('user');
+    if (storedData) {
+      setData(JSON.parse(storedData));
     }
+  }, []); // Empty dependency array to run the effect only once on component mount
 
-    const redirectToGoogleOAuth = () => {
-        const scopes = [
-            'https://www.googleapis.com/auth/youtube',
-            'https://www.googleapis.com/auth/youtube.channel-memberships.creator',
-            // 'https://www.googleapis.com/auth/youtube.force-ssl',
-            'https://www.googleapis.com/auth/youtube.readonly',
-            'https://www.googleapis.com/auth/youtube.upload',
-            'https://www.googleapis.com/auth/youtubepartner',
-            'https://www.googleapis.com/auth/youtubepartner-channel-audit',
-        ];
-        const client_id = '964165625281-7e00821c9k6n2oj25fk1c75347rr8g35.apps.googleusercontent.com';
-        const redirect_uri = 'http://localhost:5173/profile';
-        const scope = scopes.join(' ');
-        const oauth_url = `https://accounts.google.com/o/oauth2/auth?client_id=${client_id}&redirect_uri=${redirect_uri}&response_type=code&scope=${scope}&access_type=offline`;
+  // Rest of your component code
 
-        // Redirect the user to the Google OAuth URL
-        window.location.href = oauth_url;
-    };
+  return (
+    <div>
+      <h1>User Profile</h1>
+      <ul>
+        {/* Check if data is not null before accessing its properties */}
+        {data && <li>{data.email}</li>}
+       
+      </ul>
+    </div>
+  );
+}
 
+<<<<<<< HEAD
+export default Profile;
+=======
     const getTokenWithAuthorizationCode = (code) => {
         console.log('getting token with code:', code)
         const client_id = '964165625281-7e00821c9k6n2oj25fk1c75347rr8g35.apps.googleusercontent.com';
@@ -161,3 +149,4 @@ const ProfileDetails = () => {
 };
 
 export default ProfileDetails;
+>>>>>>> e0ee97950cc8a7aa2734b438d2962b14252fd5c3
