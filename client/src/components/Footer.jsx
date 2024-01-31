@@ -89,7 +89,7 @@ function Footer() {
         />
         <div className='mb-[-10px]'>
           <div className='opacity-60'>
-            © One Hub 2024. All rights reserved
+          Copyright © One Hub 2024. All rights reserved
           </div>
         </div>
       </div>

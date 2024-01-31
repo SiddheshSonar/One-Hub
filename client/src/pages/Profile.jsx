@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const ProfileDetails = () => {
-  // Sample user data (replace this with your actual data)
-  const [user] = useState({
-    firstName: 'John',
-    lastName: 'Doe',
-    username: 'johndoe',
-    email: 'john.doe@example.com',
-    youtubename: 'Funwave',
-    // Add more profile information as needed
-  });
+    // Sample user data (replace this with your actual data)
+    const [authorizationCode, setAuthorizationCode] = useState(null);
+    const [video, setVideo] = useState(null)
+    const fileInput = useRef(null)  
+
+    const [user] = useState({
+        firstName: 'John',
+        lastName: 'Doe',
+        username: 'johndoe',
+        email: 'john.doe@example.com',
+        youtubename: 'Funwave',
+        // Add more profile information as needed
+    });
 
     const sendTokenToBackend = async (data) => {
         await Api.sendTokentoBackend({ email: 'siddheshsonar3000@gmail.com', token: data, social: 'Youtube' })
@@ -128,36 +132,38 @@ const ProfileDetails = () => {
     }
 
     return (
-        <div className='w-full h-full'>
-            Profile Page
-            <button onClick={redirectToGoogleOAuth} className='flex items-center gap-2 p-2 shadow-sm rounded-xl bg-pink hover:bg-smt active:bg-pink'>
-                <span className='text-white font-semibold text-lg tracking-wide'>Connect Youtube</span>
-                <img
-                    src="https://cdn-icons-png.flaticon.com/256/1384/1384060.png"
-                    alt="yt"
-                    width={30}
-                />
-            </button>
-            <input
-                type="file"
-                accept=".mp4"
-                style={{ display: 'none' }}
-                onChange={handleFileChange}
-                ref={fileInputRef}
-            />
-            <button onClick={handleUploadClick}>
-                Upload Video
-            </button>
-            <button onClick={uploadVideo}>
-                Upload
-            </button>
+        <div>
+            <div>
+                <div className='w-full h-full'>
+                    Profile Page
+                    <button onClick={redirectToGoogleOAuth} className='flex items-center gap-2 p-2 shadow-sm rounded-xl bg-pink hover:bg-smt active:bg-pink'>
+                        <span className='text-white font-semibold text-lg tracking-wide'>Connect Youtube</span>
+                        <img
+                            src="https://cdn-icons-png.flaticon.com/256/1384/1384060.png"
+                            alt="yt"
+                            width={30}
+                        />
+                    </button>
+                    <input
+                        type="file"
+                        accept=".mp4"
+                        style={{ display: 'none' }}
+                        onChange={handleFileChange}
+                        ref={fileInputRef}
+                    />
+                    <button onClick={handleUploadClick}>
+                        Upload Video
+                    </button>
+                    <button onClick={uploadVideo}>
+                        Upload
+                    </button>
+                </div>
+            </div>
+            {/* <footer className="bg-gray-200 py-4 text-center mt-8">
+                <p className="text-gray-600">Copyright © 2022 Your Company</p>
+            </footer> */}
         </div>
-      </div>
-      <footer className="bg-gray-200 py-4 text-center mt-8">
-        <p className="text-gray-600">Copyright © 2022 Your Company</p>
-      </footer>
-    </div>
-  );
+    );
 };
 
 export default ProfileDetails;
