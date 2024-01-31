@@ -5,6 +5,7 @@ import { NavBar } from "./components/NavBar";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import Blog from "./pages/Blog";
 import Redirect from "./Redirect";
 import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
@@ -54,6 +55,10 @@ function App() {
           path: '/home',
           element: <Home />
         },
+        {
+          path: '/blog',
+          element: <Blog />
+        }
       ]
     }
   ]);
