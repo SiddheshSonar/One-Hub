@@ -26,6 +26,13 @@ export default {
       'blue' : '#0000ff',
       'gray': '#2d3748',
       'l-gray': '#E2E8F0',
+      'slate': '#708090',
+      'l-slate': '#A0AEC0',
+      'char': '#36454F',
+      'violet': '#8B00FF',
+      'indigo': '#4B0082',
+      'p-blue': "#AEC6CF",
+      'silver': "#c0c0c0"
     },
     extend: {},
   },

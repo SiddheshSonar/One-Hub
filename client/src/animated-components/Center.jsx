@@ -25,7 +25,7 @@ function Center({ children }) {
       style={{
         position: "relative",
         width: "fit-content",
-        overflow: "hidden",
+        // overflow: "hidden",
       }}
     >
       <motion.div

@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import AddPage from "./pages/AddBlog";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Uploads from "./pages/Uploads";
@@ -81,6 +82,11 @@ function App() {
           path: '/suggestions',
           element: <Suggestions />
         },
+        ,
+        {
+          path: '/AddBlog',
+          element: <AddPage />
+        },
         {
           path: '/profile',
           element: <Profile />
@@ -91,7 +97,7 @@ function App() {
 
   return (
     <AnimatePresence >
-      <div className="h-screen w-full">
+      <div className="h-full w-full">
         <RouterProvider router={router} />
       </div>
     </AnimatePresence>
