@@ -1,17 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
-// import { GoogleLogin } from 'react-google-oauth';
-import { toast } from 'react-toastify';
-import Api from '../api';
+import React, { useState } from 'react';
 
-const Profile = () => {
-    const [userInfo, setUserInfo] = useState({});
-    const [authorizationCode, setAuthorizationCode] = useState('');
-    const [video, setVideo] = useState(null)
-    // const signUpWithGoogle = async (res) => {
-    //     await axios.get('http://localhost:5000/api/google/auth')
-    //     .then(res => console.log(res))
-    //     .catch(err => console.log(err))
-    // }; 
+const ProfileDetails = () => {
+  // Sample user data (replace this with your actual data)
+  const [user] = useState({
+    firstName: 'John',
+    lastName: 'Doe',
+    username: 'johndoe',
+    email: 'john.doe@example.com',
+    youtubename: 'Funwave',
+    // Add more profile information as needed
+  });
 
     const sendTokenToBackend = async (data) => {
         await Api.sendTokentoBackend({ email: 'siddheshsonar3000@gmail.com', token: data, social: 'Youtube' })
@@ -154,7 +152,12 @@ const Profile = () => {
                 Upload
             </button>
         </div>
-    );
+      </div>
+      <footer className="bg-gray-200 py-4 text-center mt-8">
+        <p className="text-gray-600">Copyright © 2022 Your Company</p>
+      </footer>
+    </div>
+  );
 };
 
-export default Profile;
+export default ProfileDetails;
