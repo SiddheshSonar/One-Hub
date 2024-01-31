@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
+import SingleBlog from "./components/blog/SingleBlog";
 import Redirect from "./Redirect";
 import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
@@ -58,6 +59,10 @@ function App() {
         {
           path: '/blog',
           element: <Blog />
+        },
+        {
+          path: '/blog/:id',
+          element: <SingleBlog />
         }
       ]
     }

@@ -1,5 +1,19 @@
 import mongoose from 'mongoose';
 
+const socialsSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  is_connected: {
+    type: Boolean,
+    required: true,
+  },
+  link: {
+    type: String,
+  },
+});
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -20,7 +34,9 @@ const userSchema = new mongoose.Schema({
   },
   pfp: {
     type: String,
-  }
+  },
+  socials: [socialsSchema],
+
 });
 
 const User = mongoose.model("user", userSchema);
