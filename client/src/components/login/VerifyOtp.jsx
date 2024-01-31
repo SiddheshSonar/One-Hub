@@ -39,8 +39,9 @@ export default function VerifyOtp({ open, handleClose, email, setLoginInfo}) {
                     email: '', 
                     password: ''
                 })
-                // await timeout(2000);
-                navigate("/home");
+                await timeout(1500);
+                // navigate("/home");
+                window.location.href = "/home";
             }
             else {
                 toast.error(res.data.message);

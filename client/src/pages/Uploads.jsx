@@ -2,7 +2,7 @@ import React from 'react';
 
 const Uploads = () => {
     return (
-        <div>
+        <div className='w-full h-full'>
             Uploads page
         </div>
     );
