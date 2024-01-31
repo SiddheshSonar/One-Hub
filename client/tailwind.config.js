@@ -31,6 +31,8 @@ export default {
       'char': '#36454F',
       'violet': '#8B00FF',
       'indigo': '#4B0082',
+      'p-blue': "#AEC6CF",
+      'silver': "#c0c0c0"
     },
     extend: {},
   },

@@ -74,12 +74,12 @@ function Footer() {
               <a 
               href='https://oculus.spit.ac.in/privacy-policy'
               target='_blank'
-              className='cursor-pointer opacity-75 hover:opacity-100 hover:text-red font-semibold'
+              className='cursor-pointer opacity-75 hover:opacity-100 hover:text-slate font-semibold'
               >Privacy Policy</a>
               <a 
               href='https://oculus.spit.ac.in/terms-and-conditions'
               target='_blank'
-              className='cursor-pointer opacity-75 hover:opacity-100 hover:text-red font-semibold'
+              className='cursor-pointer opacity-75 hover:opacity-100 hover:text-slate font-semibold'
               >Terms and Conditions</a>
             </div>
           </div>

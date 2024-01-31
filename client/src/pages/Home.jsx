@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FiBatteryCharging, FiWifi } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 import Text from "../components/bubble/Text";
 import Center from "../animated-components/Center";
 import Left from "../animated-components/Left";
@@ -113,6 +114,8 @@ const HeaderBar = () => {
 };
 
 const Screen = () => {
+    const navigate = useNavigate();
+    
     return (
         <div className="relative z-0 grid h-full w-full place-content-center overflow-hidden rounded-[20px] bg-white">
             {/* Example logo from logoispum */}
@@ -134,7 +137,10 @@ const Screen = () => {
                 ></path>
             </svg>
 
-            <button className="absolute bottom-4 left-4 right-4 z-10 rounded-lg border-[1px] bg-white py-2 text-sm font-medium text-char backdrop-blur">
+            <button onClick={() => {
+                // navigate("/uploads")
+                window.location.href = "/uploads"
+                }} className="absolute bottom-4 left-4 right-4 z-10 rounded-lg border-[1px] bg-white py-2 text-sm font-medium text-char backdrop-blur">
                 Get Started
             </button>
 
