@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { blogList } from '../components/blog/config/data';
 import Add from '../components/Add'
 
-export default function Blog() {
+function Blog() {
   const [id, setId] = useState(window.location.pathname.split('/')[2]);
   const [blog, setBlog] = useState(null);
 
