@@ -1,10 +1,14 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import { NavBar } from "./components/NavBar";
+import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import Uploads from "./pages/Uploads";
+import Dashboard from "./pages/Dashboard";
+import Suggestions from "./pages/Suggestions";
+import BlogHome from "./pages/BlogHome";
 import Blog from "./pages/Blog";
 import Redirect from "./Redirect";
 import { useSelector } from 'react-redux';
@@ -58,8 +62,24 @@ function App() {
         },
         {
           path: '/blog',
+          element: <BlogHome />
+        },
+        {
+          path: '/blog/:id',
           element: <Blog />
-        }
+        },
+        {
+          path: '/uploads',
+          element: <Uploads />
+        },
+        {
+          path: '/dashboard',
+          element: <Dashboard />
+        },
+        {
+          path: '/suggestions',
+          element: <Suggestions />
+        },
       ]
     }
   ]);

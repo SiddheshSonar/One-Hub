@@ -13,9 +13,10 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { MuiOtpInput } from 'mui-one-time-password-input';
+import Api from '../../api';
 
 
-export default function VerifyOtp({ open, handleClose, email, type }) {
+export default function VerifyOtp({ open, handleClose, email, setLoginInfo}) {
     const [pin, setPin] = useState("");
     const navigate = useNavigate();
 
@@ -25,32 +26,27 @@ export default function VerifyOtp({ open, handleClose, email, type }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // try {
-        //     const data = {
-        //         email: email,
-        //         otp: pin,
-        //         type: type,
-        //     };
-        //     const res = await APIRequests.verifyOTP(data);
-        //     if (res.status === 200) {
-        //         localStorage.setItem("isIn", 'true');
-        //         localStorage.setItem("profile", JSON.stringify(res.data));
-        //         toast.success('Login Successful!');
-        //         await timeout(2000);
-        //         if (type === 'hospital') {
-        //             window.location.pathname = '/transplant'
-
-        //         }
-        //         else {
-
-        //             window.location.pathname = '/home'
-        //         }
-        //     }
-        //     handleClose();
-        // } catch (error) {
-        //     console.error(error);
-        //     toast.error('Invalid OTP!');
-        // }
+        console.log(pin)
+        await Api.verifyOtp({email, otp:pin})
+        .then(async (res) => {
+            console.log(res.data);
+            if (res.data.message == 'success') {
+                toast.success("Logged in successfully!");
+                handleClose();
+                localStorage.setItem('token', res.data.token);
+                setPin("");
+                setLoginInfo({
+                    email: '', 
+                    password: ''
+                })
+                await timeout(1500);
+                // navigate("/home");
+                window.location.href = "/home";
+            }
+            else {
+                toast.error(res.data.message);
+            }
+        })
     };
 
     return (

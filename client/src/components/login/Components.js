@@ -1,14 +1,30 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-background-color: #fff;
-border-radius: 10px;
-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-position: relative;
-overflow: hidden;
-width: 678px;
-max-width: 100%;
-min-height: 400px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  position: relative;
+  overflow: hidden;
+  width: 60%;
+  max-width: 100%;
+  min-height: 450px;
+
+  @media (max-width: 1200px) {
+    width: 65%;
+  }
+
+  @media (max-width: 992px) {
+    width: 75%;
+  }
+
+  @media (max-width: 768px) {
+    width: 80%;
+  }
+
+  @media (max-width: 576px) {
+    width: 90%;
+  }
 `;
 
 export const SignUpContainer = styled.div`
@@ -152,7 +168,7 @@ export const RightOverlayPanel = styled(OverlayPanel)`
 
 export const Paragraph = styled.p`
 font-size: 14px;
-  font-weight: 100;
+  // font-weight: 100;
   line-height: 20px;
   letter-spacing: 0.5px;
   margin: 20px 0 30px

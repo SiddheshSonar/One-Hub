@@ -24,6 +24,8 @@ export default {
       'd-pink': '#ED5AB3',
       'l-pink': '#FF90C2',
       'blue' : '#0000ff',
+      'gray': '#2d3748',
+      'l-gray': '#E2E8F0',
     },
     extend: {},
   },

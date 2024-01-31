@@ -10,8 +10,8 @@ function Footer() {
   return (
     <footer className="bottom-0 left-0 w-full bg-black bg-opacity-90 text-white py-8 flex justify-center">
       <div className='container mx-auto w-full flex flex-col items-center justify-center gap-4'>
-        <div className='w-full flex-1 flex flex-col md:flex-row items-center md:items-start justify-around gap-4 md:gap-2'>
-          <div className='flex flex-col items-center justify-center gap-2'>
+        {/* <div className='w-full flex-1 flex flex-col md:flex-row items-center md:items-start justify-around gap-4 md:gap-2'> */}
+          {/* <div className='flex flex-col items-center justify-center gap-2'>
             <div className='text-lg font-bold tracking-wide'>
               Social Links
             </div>
@@ -53,8 +53,8 @@ function Footer() {
                 </a>
               </div>
             </div>
-          </div>
-          <div className='flex flex-col items-center justify-center gap-2'>
+          </div> */}
+          {/* <div className='flex flex-col items-center justify-center gap-2'>
             <div className='text-lg font-bold tracking-wide'>
               Mobile App
             </div>
@@ -65,8 +65,8 @@ function Footer() {
                 width={150}
               />
             </button>
-          </div>
-          <div className='flex flex-col items-center justify-center gap-2'>
+          </div> */}
+          {/* <div className='flex flex-col items-center justify-center gap-2'>
             <div className='text-lg font-bold tracking-wide'>
               Legal
             </div>
@@ -81,20 +81,15 @@ function Footer() {
               target='_blank'
               className='cursor-pointer opacity-75 hover:opacity-100 hover:text-red font-semibold'
               >Terms and Conditions</a>
-              <a 
-              href='https://oculus.spit.ac.in/refund-policy'
-              target='_blank'
-              className='cursor-pointer opacity-75 hover:opacity-100 hover:text-red font-semibold'
-              >Refund Policy</a>
             </div>
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
         <hr
           className='w-[90%] opacity-20' 
         />
         <div className='mb-[-10px]'>
           <div className='opacity-60'>
-            © Siddhesh Sonar. All rights reserved
+            © One Hub 2024. All rights reserved
           </div>
         </div>
       </div>
