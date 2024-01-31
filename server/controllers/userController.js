@@ -62,7 +62,30 @@ class UserController {
     try {
       const { name, email, phone, password } = req.body;
       const passwordHash = await bcrypt.hash(password, 10);
-      const newUser = new User({ name, email, phone, password: passwordHash });
+      const userSocials = [
+        {
+          name: "Facebook",
+          is_connected: false,
+          link: "",
+          token: "",
+          refresh_token: ""
+        },
+        {
+          name: "Instagram",
+          is_connected: false,
+          link: "",
+          token: "",
+          refresh_token: ""
+        },
+        {
+          name: "Youtube",
+          is_connected: false,
+          link: "",
+          token: "",
+          refresh_token: ""
+        },
+      ];
+      const newUser = new User({ name, email, phone, password: passwordHash, socials: userSocials});
       await newUser.save();
       res.status(200).json({ message: "success" });
     } catch (error) {
@@ -117,6 +140,36 @@ class UserController {
       { expiresIn: "12h" }
       );
       res.status(200).json({ message: "success", token });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
+
+  // send user token to backend
+  sendToken = async (req, res) => {
+    try {
+      const { email, token, social }  = req.body;
+      console.log(email, token, social) 
+      const user = await User.findOne({ email });
+      if (!user) return res.status(404).json({ message: "User does not exist!" });
+      if (social == 'Youtube') {
+        user.socials[2].is_connected = true;
+        user.socials[2].token = token.access_token;
+        user.socials[2].refresh_token = token.refresh_token;
+      }
+      if (social == 'Facebook') {
+        user.socials[0].is_connected = true;
+        user.socials[0].token = token.access_token;
+        user.socials[0].refresh_token = token.refresh_token
+      }
+      if (social == 'Instagram') {
+        user.socials[1].is_connected = true;
+        user.socials[1].token = token.access_token;
+        user.socials[1].refresh_token = token.refresh_token
+      }
+      await user.save();
+      res.status(200).json({ message: "success" });
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Internal Server Error" });
