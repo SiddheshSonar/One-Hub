@@ -62,6 +62,7 @@ bR.post("/upload/youtube", upload.single('video'), async (req, res) => {
 
     // Your existing code here...
 
+    const video_path = video.path;
     const pythonProcess = spawn('python', [
       "./pythonscripts/yt.py",
       accessToken,
@@ -70,7 +71,8 @@ bR.post("/upload/youtube", upload.single('video'), async (req, res) => {
       privacy,
       category,
       tags,
-      video.path // Assuming video.path is the correct path to the video file
+      // video.path // Assuming video.path is the correct path to the video file
+      video_path
     ]);
 
     // Rest of your existing code...

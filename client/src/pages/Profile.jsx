@@ -14,7 +14,7 @@ const Profile = () => {
     // }; 
 
     const sendTokenToBackend = async (data) => {
-        await Api.sendTokentoBackend({ email: 'sonarsiddhesh105@gmail.com', token: data, social: 'Youtube' })
+        await Api.sendTokentoBackend({ email: 'siddheshsonar3000@gmail.com', token: data, social: 'Youtube' })
             .then((res) => {
                 console.log(res.data)
                 toast.success('Google Account Authorized Successfully!')
@@ -118,7 +118,7 @@ const Profile = () => {
     const uploadVideo = async () => {
         const formData = new FormData()
         formData.append('video', video)
-        formData.append('title', 'Test Video')
+        formData.append('title', 'Dummy Video')
         formData.append('description', 'Test Description')
         formData.append('privacy', 'public')
         formData.append('category', '22')
