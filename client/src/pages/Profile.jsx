@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 // import { GoogleLogin } from 'react-google-oauth';
 import { toast } from 'react-toastify';
 import Api from '../api';
+import Button from '@mui/material/Button';
 
 const Profile = () => {
     const [userInfo, setUserInfo] = useState({});
@@ -147,10 +148,10 @@ const Profile = () => {
                 onChange={handleFileChange}
                 ref={fileInputRef}
             />
-            <button onClick={handleUploadClick}>
+            <button variant="contained" className=' bg-pink' onClick={handleUploadClick}>
                 Upload Video
             </button>
-            <button onClick={uploadVideo}>
+            <button variant="contained" className='bg-pink' onClick={uploadVideo}>
                 Upload
             </button>
         </div>
