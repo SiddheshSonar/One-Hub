@@ -25,6 +25,10 @@ const suggestionSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  app: {
+    type: String,
+    required: true,
+  },
   description: {
     type: String,
     required: true,
