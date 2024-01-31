@@ -5,6 +5,9 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import Uploads from "./pages/Uploads";
+import Dashboard from "./pages/Dashboard";
+import Suggestions from "./pages/Suggestions";
 import BlogHome from "./pages/BlogHome";
 import Blog from "./pages/Blog";
 import Redirect from "./Redirect";
@@ -64,7 +67,18 @@ function App() {
           path: '/blog/:id',
           element: <Blog />
         },
-
+        {
+          path: '/uploads',
+          element: <Uploads />
+        },
+        {
+          path: '/dashboard',
+          element: <Dashboard />
+        },
+        {
+          path: '/suggestions',
+          element: <Suggestions />
+        },
       ]
     }
   ]);
