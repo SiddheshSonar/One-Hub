@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 
-function Center({ children }) {
+function Left({ children }) {
   const ref = useRef(null);
   const isInView = useInView(ref);
   const mainControls = useAnimation();
@@ -32,12 +32,12 @@ function Center({ children }) {
         variants={{
           hidden: {
             opacity: 0,
-            // x: -200,
+            x: 200,
             // y: 200,
           },
           visible: {
             opacity: 1,
-            // x: 0,
+            x: 0,
             // y: 0,
           },
         }}
@@ -55,4 +55,4 @@ function Center({ children }) {
   );
 }
 
-export default Center;
+export default Left;

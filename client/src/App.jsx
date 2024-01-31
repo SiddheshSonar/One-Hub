@@ -97,7 +97,7 @@ function App() {
 
   return (
     <AnimatePresence >
-      <div className="h-screen w-full">
+      <div className="h-full w-full">
         <RouterProvider router={router} />
       </div>
     </AnimatePresence>
