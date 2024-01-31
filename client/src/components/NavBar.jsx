@@ -24,7 +24,7 @@ function NavBar() {
     }, [window.location.pathname])
 
   return (
-    <Disclosure as="nav" className="bg-gray ">
+    <Disclosure as="nav" className="bg-gray sticky top-0 z-[999]">
       {({ open }) => (
         <>
           <div className="mx-auto px-2 sm:px-6 lg:px-16">
@@ -107,7 +107,7 @@ function NavBar() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href="/profile"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Your Profile

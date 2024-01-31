@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import Suggestions from "./pages/Suggestions";
 import BlogHome from "./pages/BlogHome";
 import Blog from "./pages/Blog";
+import Profile from "./pages/Profile";
 import Redirect from "./Redirect";
 import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
@@ -80,6 +81,10 @@ function App() {
           path: '/suggestions',
           element: <Suggestions />
         },
+        {
+          path: '/profile',
+          element: <Profile />
+        }
       ]
     }
   ]);
