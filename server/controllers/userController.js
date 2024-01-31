@@ -5,8 +5,13 @@ import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import dotenv from "dotenv";
 import nodemailer from "nodemailer";
+import OpenAI from "openai";
 
 dotenv.config();
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+})
 
 class UserController {
   constructor() { }
@@ -176,6 +181,48 @@ class UserController {
     }
   }
 
+  // send user info
+  sendUserInfo = async (req, res) => {
+    try {
+      const { email } = req.body;
+      const user = await User.findOne({ email });
+      if (!user) return res.status(404).json({ message: "User does not exist!" });
+      res.status(200).json({ message: "success", user });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
+
+  // give user suggestions
+  userSuggestions = async (req, res) => {
+    try {
+      const { email, userData } = req.body;
+      const user = await User.findOne({ email });
+      if (!user) return res.status(404).json({ message: "User does not exist!" });
+      const response = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: [{
+          "role": "user",
+          "content": `Give meaningful insights based on the following data of user - ${userData}`,
+        }],
+        max_tokens: 100,
+      });
+      const suggestion = response.data.choices[0].text;
+      const date = new Date();
+      const newSuggestion = {
+        date,
+        description: suggestion,
+        userInfo: userData,
+      }
+      user.suggestion.push(newSuggestion);
+      await user.save();
+      res.status(200).json({ message: "success", suggestion });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
 }
 
 export default UserController;

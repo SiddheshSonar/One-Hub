@@ -20,6 +20,21 @@ const socialsSchema = new mongoose.Schema({
   },
 });
 
+const suggestionSchema = new mongoose.Schema({
+  date: {
+    type: Date,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  userInfo: {
+    type: String,
+    required: true,
+  },
+});
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -45,7 +60,7 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   socials: [socialsSchema],
-
+  suggestion: [suggestionSchema],
 });
 
 const User = mongoose.model("user", userSchema);
