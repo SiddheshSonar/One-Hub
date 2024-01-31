@@ -65,6 +65,10 @@ class Api {
     static async uploadYoutube(data) {
         return await api.post('api/upload/youtube', data);
     }
+
+    static async getUserInfo() {
+        return await api.post('api/user/get-user');
+    }
 }
 
 export default Api;

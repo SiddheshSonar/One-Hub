@@ -1,18 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
-// import { GoogleLogin } from 'react-google-oauth';
-import { toast } from 'react-toastify';
-import Api from '../api';
 import Button from '@mui/material/Button';
 
-const Profile = () => {
-    const [userInfo, setUserInfo] = useState({});
-    const [authorizationCode, setAuthorizationCode] = useState('');
+const ProfileDetails = () => {
+    // Sample user data (replace this with your actual data)
+    const [authorizationCode, setAuthorizationCode] = useState(null);
     const [video, setVideo] = useState(null)
-    // const signUpWithGoogle = async (res) => {
-    //     await axios.get('http://localhost:5000/api/google/auth')
-    //     .then(res => console.log(res))
-    //     .catch(err => console.log(err))
-    // }; 
+    const fileInput = useRef(null)  
+
+    const [user] = useState({
+        firstName: 'John',
+        lastName: 'Doe',
+        username: 'johndoe',
+        email: 'john.doe@example.com',
+        youtubename: 'Funwave',
+        // Add more profile information as needed
+    });
 
     const sendTokenToBackend = async (data) => {
         await Api.sendTokentoBackend({ email: 'siddheshsonar3000@gmail.com', token: data, social: 'Youtube' })
@@ -158,4 +160,4 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+export default ProfileDetails;

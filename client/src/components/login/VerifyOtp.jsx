@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 // import APIRequests from '../../api';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import { toast } from 'react-toastify';
 import { MuiOtpInput } from 'mui-one-time-password-input';
 import Api from '../../api';
@@ -34,6 +35,9 @@ export default function VerifyOtp({ open, handleClose, email, setLoginInfo}) {
                 toast.success("Logged in successfully!");
                 handleClose();
                 localStorage.setItem('token', res.data.token);
+                const decodedToken = jwtDecode(res.data.token);
+                // console.log(decodedToken);
+                localStorage.setItem('user', JSON.stringify(decodedToken));
                 setPin("");
                 setLoginInfo({
                     email: '', 

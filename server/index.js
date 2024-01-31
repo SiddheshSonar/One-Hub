@@ -16,6 +16,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// app.use(express.static('static'));
+app.use('/static', express.static('static'));
 
 // test api
 app.get("/test", (req, res) => {

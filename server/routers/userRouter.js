@@ -14,5 +14,7 @@ uR.post('/register', uC.register);
 uR.post('/login', uC.login);
 uR.post('/verify-otp', uC.verifyOtp);
 uR.post('/send-token', uC.sendToken);
+uR.post('/get-user', auth, uC.sendUserInfo);
+uR.post('/get-insights', auth, uC.userSuggestions);
 
 export default uR;

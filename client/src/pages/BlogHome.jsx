@@ -21,6 +21,7 @@ const BlogHome = () => {
             <Center>
             <Home />
             <IconButton onClick={goToAddBlog} 
+            className='hover:!bg-[#5677fc]'
             style={{
                 position: 'fixed',
                 bottom: 20,
@@ -28,7 +29,7 @@ const BlogHome = () => {
                 zIndex: 100,
                 backgroundColor: '#3f51b5',
                 color: 'white'
-            
+                // hover background colour change
             }}>
                 <AddOutlinedIcon sx={{
                     fontSize: 40
