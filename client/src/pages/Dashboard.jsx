@@ -10,6 +10,10 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
+import Backdrop from '@mui/material/Backdrop';
+import loaderGif from '../assets/gif-loader.gif';
+import Api from '../api';
+import { toast } from 'react-toastify';
 
 export const ImpressionsChart = ({ data, formatDate }) => {
   return (
@@ -75,11 +79,48 @@ const LikesAndDislikesChart = ({ data }) => {
 };
 
 const Dashboard = () => {
+  const userInfo = JSON.parse(localStorage.getItem('user'));
   const [data, setData] = useState(insights);
   const [app, setApp] = useState('Instagram');
-  const token = localStorage.getItem('token');
-  // const userInfo 
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  function timeout(delay) {
+    return new Promise(res => setTimeout(res, delay));
+}
+
+  const getSuggestion = async () => {
+    handleOpen();
+    setLoading(true);
+    // console.log(userInfo.email)
+    await Api.getInsights({
+      email: userInfo.email,
+      userData: app === 'Instagram' ? insights : ytInsights,
+      app: app
+    })
+    .then(async(res) => {
+      console.log(res.data);
+      await timeout(2000);
+      toast.success("Insights Generated Successfully!");
+      setLoading(false);
+      handleClose();
+      window.location.href = "/suggestions";
+    })
+    .catch((err) => {
+      console.log(err);
+      setLoading(false);
+      handleClose();
+      toast.error("Something went wrong!");
+    })
+  }
 
   const handleChange = (event) => {
     setApp(event.target.value);
@@ -99,6 +140,25 @@ const Dashboard = () => {
 
   return (
     <div className='w-full h-full p-8 flex flex-col gap-8'>
+      {open && (<div>
+      <Backdrop open={open} sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}/>
+      <div style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        zIndex: 1000
+      }}>
+        <div className='flex flex-col items-center justify-center '>
+          <span className='text-xl font-semibold tracking-wide text-l-blue'>Generating Insights, Please Wait!</span>
+        <img 
+        src={loaderGif} 
+        alt="loading..."
+        width={100} 
+        />
+        </div>
+      </div>
+      </div>)}
       <DCenter>
         <div className='w-full flex items-center justify-between'>
           <div className='self-start w-1/2 flex flex-col items-start justify-start gap-8'>
@@ -123,7 +183,7 @@ const Dashboard = () => {
                   <AlertTitle>Valuable Insight</AlertTitle>
                   This is an info Alert with an informative title.
                 </Alert> */}
-                <button className='w-[300px] flex items-center justify-center gap-1 border p-2 rounded-full bg-char text-white hover:bg-gray active:bg-char'>
+                <button onClick={getSuggestion} className='w-[300px] flex items-center justify-center gap-1 border p-2 rounded-full bg-char text-white hover:bg-gray active:bg-char'>
                   <span>Generate Valuable Insights</span><AutoFixHighIcon />
                 </button>
               </div>
