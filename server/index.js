@@ -51,7 +51,7 @@ const upload = multer({ storage });
 bR.post("/upload/youtube", upload.single('video'), async (req, res) => {
   try {
     // console.log(req.body); 
-    const { title, description, privacy, category, tags, email } = req.body;
+    const { title, description, email } = req.body;
     const video = req.file;
     // console.log(req.body)
     // console.log(video)
@@ -70,9 +70,6 @@ bR.post("/upload/youtube", upload.single('video'), async (req, res) => {
       accessToken,
       title,
       description,
-      privacy,
-      category,
-      tags,
       // video.path // Assuming video.path is the correct path to the video file
       video_path
     ]);

@@ -126,6 +126,7 @@ class UserController {
           id: user._id, 
           email: user.email,
           name: user.name,
+          is_connected: user.socials[2].is_connected,
         }, 
         secretKey,
         { expiresIn: "12h" }
