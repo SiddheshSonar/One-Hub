@@ -102,7 +102,7 @@ function App() {
 
   return (
     <AnimatePresence >
-      <div className="h-full w-full">
+      <div className="h-full w-full bg-[#E6E6FA]">
         <RouterProvider router={router} />
       </div>
     </AnimatePresence>

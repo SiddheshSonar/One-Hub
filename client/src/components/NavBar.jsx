@@ -24,7 +24,7 @@ function NavBar() {
     }, [window.location.pathname])
 
   return (
-    <Disclosure as="nav" className="bg-gray sticky top-0 z-[999]">
+    <Disclosure as="nav" className="bg-[#33006F] sticky top-0 z-[999] ">
       {({ open }) => (
         <>
           <div className="mx-auto px-2 sm:px-6 lg:px-16">
@@ -50,7 +50,7 @@ function NavBar() {
                     alt="Your Company"
                   />
                   <span className='font-bold text-white  tracking-wide ml-2 text-xl'>
-                    One Hub
+                    ONE HUB
                   </span>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">

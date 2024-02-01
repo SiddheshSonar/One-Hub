@@ -46,7 +46,7 @@ const Suggestions = () => {
     };
 
     return (
-        <div className='w-full h-full'>
+        <div  className='w-full h-full' >
             {loading ?
                 (<div className='flex justify-center items-center h-full'>
                     <CircularProgress sx={{

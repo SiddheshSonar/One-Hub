@@ -189,7 +189,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div className='relative w-[650px] rounded-xl shadow-lg shadow-p-blue pl-4 pt-2'
+          <div className='relative w-[650px] rounded-xl shadow-lg shadow-white bg-white pl-4 pt-2'
             style={{
               boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)'
             }}>
@@ -206,7 +206,7 @@ const Dashboard = () => {
       </DCenter>
       <DCenter>
         <div className='w-full flex items-center justify-between'>
-          <div className='relative w-[650px] rounded-xl shadow-lg shadow-p-blue pl-4 pt-2'
+          <div className='relative w-[650px] rounded-xl shadow-lg shadow-white bg-white pl-4 pt-2'
             style={{
               boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)'
             }}>
@@ -218,7 +218,7 @@ const Dashboard = () => {
               {app === 'Instagram' ?"Reach" : "Subscribers"}
             </div>
           </div>
-          <div className='relative w-[650px] rounded-xl shadow-lg shadow-p-blue pl-4 pt-2'
+          <div className='relative w-[650px] rounded-xl shadow-lg shadow-black bg-white pl-4 pt-2'
             style={{
               boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)'
             }}>

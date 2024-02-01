@@ -15,9 +15,9 @@ const Home = () => {
             <div className="mt-16 flex flex-col items-start justify-between gap-8 md:px-8">
                 <div>
                     <Left>
-                        <h2 className="max-w-lg text-4xl font-bold md:text-5xl">
+                        <h2 className="max-w-lg text-4xl font-bold md:text-5xl text-black">
                             Grow faster with our
-                            <span className="text-l-slate"> all in one solution</span>
+                            <span className="text-l-slate text-[#662d91]"> all in one solution</span>
                         </h2>
                     </Left>
                     {/* <div>
@@ -32,7 +32,7 @@ const Home = () => {
                             alt=""
                             className="w-24 h-24" 
                             />
-                            <span className="tracking-wide">
+                            <span className="tracking-wide text-black">
                                 ONE HUB
                             </span>
                         </div>
@@ -52,8 +52,8 @@ const Home = () => {
                             <span className="text-l-slate"> Master It</span>
                         </h2> */}
                         {/* <WaterGrid /> */}
-                        <div className="text-lg text-l-slate font-semibold">
-                            Don't Just Manage Your Social, <span className="font-bold text-char">Master It.</span> 
+                        <div className="text-lg text-l-slate font-semibold text-[#662d91]">
+                            Don't Just Manage Your Social, <span className=" text-black">Master It.</span> 
                         </div>
                     </Right>
                     {/* <div>
@@ -77,7 +77,7 @@ const FloatingPhone = () => {
                 transformStyle: "preserve-3d",
                 transform: "rotateY(-30deg) rotateX(15deg)",
             }}
-            className="rounded-[24px] bg-char"
+            className="rounded-[24px] bg-[#33006F]"
         >
             <motion.div
                 initial={{
@@ -92,7 +92,7 @@ const FloatingPhone = () => {
                     duration: 2,
                     ease: "easeInOut",
                 }}
-                className="relative h-96 w-56 rounded-[24px] border-2 border-b-4 border-r-4 border-white border-l-[#E5E7EB] border-t-[#E5E7EB] bg-[#111827] p-1 pl-[3px] pt-[3px]"
+                className="relative h-96 w-56 rounded-[24px] border-2 border-b-4 border-r-4 border-white border-l-[#E5E7EB] border-t-[#E5E7EB] bg-[#33006F] p-1 pl-[3px] pt-[3px]"
             >
                 <HeaderBar />
                 <Screen />
@@ -125,7 +125,7 @@ const Screen = () => {
                 viewBox="0 0 50 39"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="fill-char"
+                className="fill-[#33006F]"
             >
                 <path
                     d="M16.4992 2H37.5808L22.0816 24.9729H1L16.4992 2Z"
@@ -140,12 +140,12 @@ const Screen = () => {
             <button onClick={() => {
                 // navigate("/uploads")
                 window.location.href = "/uploads"
-                }} className="absolute bottom-4 left-4 right-4 z-10 rounded-lg border-[1px] bg-white py-2 text-sm font-medium text-char backdrop-blur">
+                }} className="absolute bottom-4 left-4 right-4 z-10 rounded-lg border-[1px] bg-white py-2 text-sm font-medium text-[#33006F] backdrop-blur">
                 Get Started
             </button>
 
             {/* <div className="absolute -left-32 -top-32 h-64 w-64 rounded-full bg-char" /> */}
-            <div className="absolute -bottom-72 left-[50%] h-96 w-96 -translate-x-[50%] rounded-full bg-char" />
+            <div className="absolute -bottom-72 left-[50%] h-96 w-96 -translate-x-[50%] rounded-full bg-[#33006F]" />
         </div>
     );
 };
