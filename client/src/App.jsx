@@ -12,6 +12,7 @@ import Suggestions from "./pages/Suggestions";
 import BlogHome from "./pages/BlogHome";
 import Blog from "./pages/Blog";
 import Profile from "./pages/Profile";
+import AI from "./pages/AI";
 import Redirect from "./Redirect";
 import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
@@ -61,6 +62,10 @@ function App() {
         {
           path: '/home',
           element: <Home />
+        },
+        {
+          path:'/imagegen',
+          element:<AI/>
         },
         {
           path: '/blog',
