@@ -194,6 +194,11 @@ const Uploads = () => {
                     </div>
                     <Backdrop open={!isConnected} sx={{ color: '#fff', zIndex: 999 }} />
                 </>)}
+                    <div onClick={() => {
+                        window.location.href = '/imagegen'
+                    }} className='absolute p-2 rounded-md mt-2 hover:text-white cursor-pointer font-bold text-red border-red border-2 outline-red hover:bg-red'>
+                        Create Thumbnail
+                    </div>
                 <div className='w-1/2 flex flex-col items-center justify-center'>
                     <div className='mt-4 font-bold text-4xl'>
                         Start Uploading!
@@ -289,6 +294,10 @@ const YtCard = ({ title, subtitle, Icon, href, toggleYt, isYoutubeSelected }) =>
         <a
             onClick={() => toggleYt()}
             href={href}
+            style={{
+                // shadow if isYoutubeSelected
+                boxShadow: isYoutubeSelected ? '0px 0px 20px 0px #FD1D1D' : ''
+            }}
             className="w-[500px] h-[250px] cursor-pointer p-4 self-center rounded-2xl border-[1px] border-slate relative overflow-hidden group bg-white"
         >
             <div className="absolute inset-0 bg-gradient-to-r from-yt-red to-red translate-y-[0%] transition-transform duration-300" />
@@ -310,6 +319,10 @@ const InstaCard = ({ title, subtitle, Icon, href, toggleInsta, isInstaSelected }
         <a
             onClick={() => toggleInsta()}
             href={href}
+            style={{
+                // shadow if isYoutubeSelected
+                boxShadow: isInstaSelected ? '0px 0px 20px 0px #C13584' : ''
+            }}
             className="w-[500px] h-[250px] cursor-pointer p-4 self-center rounded-2xl border-[1px] border-slate relative overflow-hidden group bg-white"
         >
             <div className="absolute inset-0 bg-gradient-to-r from-[#ee2a7b] to-[#6228d7] :translate-y-[0%] transition-transform duration-300" />
