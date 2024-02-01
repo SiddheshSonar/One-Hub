@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import CancelIcon from '@mui/icons-material/Cancel';
 import { IconButton } from "@mui/material";
 
-export default function VideoInput({ width, height }) {
+export default function VideoInput({ width, height, setVid }) {
     //   const { width, height } = props;
     const [video, setVideo] = useState(null);
 
@@ -21,13 +21,17 @@ export default function VideoInput({ width, height }) {
             toast.error('Video should be in mp4 format')
             return
         }
+        setVid(file)
         setVideo(file);
-        console.log(file)
+        // console.log(file)
         const url = URL.createObjectURL(file);
         setSource(url);
     };
 
     const handleRemove = (event) => {
+        event.preventDefault();
+        inputRef.current.value = null;
+        setVid(null)
         setVideo(null);
         setSource(null);
     };
@@ -47,7 +51,7 @@ export default function VideoInput({ width, height }) {
             />
             {/* {!source &&  */}
             <div className="w-full flex items-center justify-center mb-8">
-                <button className="border p-2 rounded-full" onClick={handleChoose}>Choose Video</button>
+                <button className="border p-2 rounded-full bg-cobalt hover:bg-d-blue active:bg-blue text-white" onClick={handleChoose}>Choose Video</button>
             </div>
             {source && (
                 <video
@@ -58,7 +62,7 @@ export default function VideoInput({ width, height }) {
                     src={source}
                 />
             )}
-            <div className="VideoInput_footer w-full text-center mt-2 font-bold flex items-center justify-center">{video?.name || "Nothing selected"} {video && <IconButton onClick={handleRemove}><CancelIcon /></IconButton>}</div>
+            <div className="VideoInput_footer w-full text-center mt-2 font-bold flex items-center justify-center mb-4">{video?.name || "Nothing selected"} {video && <IconButton onClick={handleRemove}><CancelIcon /></IconButton>}</div>
         </div>
     );
 }

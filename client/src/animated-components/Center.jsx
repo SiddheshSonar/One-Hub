@@ -23,8 +23,8 @@ function Center({ children }) {
     <div
       ref={ref}
       style={{
-        position: "relative",
-        width: "fit-content",
+        // position: "relative",
+        // width: "fit-content",
         // overflow: "hidden",
       }}
     >

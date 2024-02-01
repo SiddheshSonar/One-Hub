@@ -32,7 +32,10 @@ export default {
       'violet': '#8B00FF',
       'indigo': '#4B0082',
       'p-blue': "#AEC6CF",
-      'silver': "#c0c0c0"
+      'silver': "#c0c0c0",
+      'cobalt': '#0047AB',
+      'yt-red': '#FF0000',
+      
     },
     extend: {},
   },
