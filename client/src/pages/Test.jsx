@@ -7,11 +7,7 @@ const Test = () => {
     const [userInfo, setUserInfo] = useState({});
     const [authorizationCode, setAuthorizationCode] = useState('');
     const [video, setVideo] = useState(null)
-    // const signUpWithGoogle = async (res) => {
-    //     await axios.get('http://localhost:5000/api/google/auth')
-    //     .then(res => console.log(res))
-    //     .catch(err => console.log(err))
-    // }; 
+
 
     const sendTokenToBackend = async (data) => {
         await Api.sendTokentoBackend({ email: 'sonarsiddhesh105@gmail.com', token: data, social: 'Youtube' })
