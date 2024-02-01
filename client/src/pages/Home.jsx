@@ -17,7 +17,7 @@ const Home = () => {
                     <Left>
                         <h2 className="max-w-lg text-4xl font-bold md:text-5xl text-black">
                             Grow faster with our
-                            <span className="text-l-slate text-[#662d91]"> all in one solution</span>
+                            <span className="text-[#662d91]"> all in one solution</span>
                         </h2>
                     </Left>
                     {/* <div>
@@ -52,7 +52,7 @@ const Home = () => {
                             <span className="text-l-slate"> Master It</span>
                         </h2> */}
                         {/* <WaterGrid /> */}
-                        <div className="text-lg text-l-slate font-semibold text-[#662d91]">
+                        <div className="text-lg font-semibold text-[#662d91]">
                             Don't Just Manage Your Social, <span className=" text-black">Master It.</span> 
                         </div>
                     </Right>
