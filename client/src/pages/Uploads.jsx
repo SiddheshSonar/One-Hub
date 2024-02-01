@@ -6,6 +6,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { Check } from '@mui/icons-material';
 import DCenter from '../animated-components/DCenter';
 import Backdrop from '@mui/material/Backdrop';
+import { TextField } from '@mui/material';
 import Api from '../api';
 
 const Uploads = () => {
@@ -14,6 +15,8 @@ const Uploads = () => {
     const [isYoutubeSelected, setIsYoutubeSelected] = useState(false)
     const user = JSON.parse(localStorage.getItem('user'))
     const [isConnected, setIsConnected] = useState(JSON.parse(localStorage.getItem('user')).is_connected)
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
 
     const toggleYt = () => {
         setIsYoutubeSelected(!isYoutubeSelected)
@@ -106,15 +109,60 @@ const Uploads = () => {
     }, []);
 
     const uploadVideo = async () => {
+        if (!video || !title || !description) {
+            toast.error('Please fill all the fields')
+            return
+        }
+        if (!isYoutubeSelected && !isInstaSelected) {
+            toast.error('Please select a platform')
+            return
+        }
         const formData = new FormData()
         formData.append('video', video)
-        formData.append('title', 'Test Video')
-        formData.append('description', 'Test Description')
+        formData.append('title', title)
+        formData.append('description', description)
         formData.append('privacy', 'public')
         formData.append('email', user.email)
-        await Api.uploadYoutube(formData)
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
+        formData.append('caption', title + ' | ' + description)
+        if (isYoutubeSelected && isInstaSelected) {
+            await Api.uploadOnBoth(formData)
+                .then(res => {
+                    console.log(res.data)
+                    toast.success('Video Will Be Uploaded Soon!')
+                    setVideo(null)
+                    setTitle('')
+                    setDescription('')
+                    setIsYoutubeSelected(false)
+                    setIsInstaSelected(false)
+                })
+                .catch(err => console.log(err))
+        }
+        else if (isYoutubeSelected) {
+            await Api.uploadYoutube(formData)
+                .then(res => {
+                    console.log(res.data)
+                    toast.success('Video Will Be Uploaded Soon!')
+                    setVideo(null)
+                    setTitle('')
+                    setDescription('')
+                    setIsYoutubeSelected(false)
+                    setIsInstaSelected(false)
+                })
+                .catch(err => console.log(err))
+        }
+        else if (isInstaSelected) {
+            await Api.uploadInstagram(formData)
+                .then(res => {
+                    console.log(res.data)
+                    toast.success('Video Will Be Uploaded Soon!')
+                    setVideo(null)
+                    setTitle('')
+                    setDescription('')
+                    setIsYoutubeSelected(false)
+                    setIsInstaSelected(false)
+                })
+                .catch(err => console.log(err))
+        }
     }
 
     return (
@@ -150,14 +198,37 @@ const Uploads = () => {
                     <div className='mt-4 font-bold text-4xl'>
                         Start Uploading!
                     </div>
-                    <div className='mt-4'>
-                        <VideoInput width={600} height={600} setVid={setVideo} />
+                    <div className='mt-2'>
+                        <VideoInput width={300} height={300} setVid={setVideo} vid={video} />
                     </div>
+                    <TextField
+                        className='mt-4'
+                        id="outlined-basic"
+                        label="Video Title"
+                        variant="outlined"
+                        sx={{ width: '500px' }}
+                        size='small'
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                     />
+                    <TextField
+                        className='!mt-4'
+                        id="outlined-basic"
+                        label="Video Description"
+                        variant="outlined"
+                        sx={{ width: '500px' }}
+                        multiline
+                        rows={3}
+                        // size='small'
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        />
                     <Card
                         title="Upload"
                         subtitle="Manage profile"
                         href="#"
                         Icon={FiUpload}
+                        uploadVideo={uploadVideo}
                     />
                 </div>
                 <div className='w-1/2 flex flex-col gap-16 items-start h-full justify-start mt-12'>
@@ -192,9 +263,10 @@ const Uploads = () => {
     );
 };
 
-const Card = ({ title, subtitle, Icon, href }) => {
+const Card = ({ title, subtitle, Icon, href, uploadVideo }) => {
     return (
         <a
+            onClick={() => uploadVideo()}
             href={href}
             className="w-[250px] absolute bottom-12 p-4 self-center rounded-2xl border-[1px] border-slate overflow-hidden group bg-white"
         >

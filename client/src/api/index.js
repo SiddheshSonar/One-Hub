@@ -66,6 +66,14 @@ class Api {
         return await api.post('api/upload/youtube', data);
     }
 
+    static async uploadInstagram(data) {
+        return await api.post('api/upload/instagram', data);
+    }
+
+    static async uploadOnBoth(data) {
+        return await api.post('api/upload/both', data);
+    }
+
     static async getUserInfo(data) {
         return await api.post('api/user/get-user', data);
     }

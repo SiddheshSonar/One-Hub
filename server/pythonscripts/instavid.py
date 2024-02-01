@@ -1,12 +1,14 @@
 import json
 import requests
 import time
-def upload_video(video_url, access_token,ig_user_id):
+import sys
+
+def upload_video(video_url, access_token,ig_user_id, caption):
     post_url="https://graph.facebook.com/v19.0/{}/media".format(ig_user_id)
     payload={
         'media_type':'REELS',
         'video_url':video_url,
-        'caption':'instagram post',
+        'caption':caption,
         'access_token':access_token
     }
     r=requests.post(post_url,data=payload)
@@ -40,10 +42,12 @@ def publish_video(results,access_token):
         print('video nahi ho paaya')
 
 ig_user_id="17841464523148006"
-access_token='EAANSdVUHItgBOZBssqCx5tmjNf1hhGt0rnceNCj6Fuh9HXwzMEZB53L7t5PkZAdZBThVonVv1bvEXhOsYCwwdNSZB7ZChi2NPyuICVgOcZBKK3jgOoOqHlumVNBoOROc0XzMfjzgA602OZAMriASAZAYtjNaiusYWVkS9NSoxrObM4JIuzqjKIhR52gpS9B4tgS1x7Lc80N54Iplu2pWSOwgukybWcZC0ZD'
-video_url="https://media.publit.io/file/sample-5s-X.mp4"
+access_token='EAANSdVUHItgBO1LUF9bRNcx7kuR70MGEJcztIgE7DPIHZB9mYXMAdPhfWZA7gcRjz8HZCGsPu5jQQrFmzu2BbxA6DDyy58f9vDe8j9at8HojSt3aXEcUhLIMNaQRfz6AOCMIDW7IKkpe81UrqPlPgNbUsafg4PzlJ6dcCwUMQWOOUNJheLkTZCvaWRZCPldN7'
+# video_url="https://media.publit.io/file/sample-5s-X.mp4"
+video_url=sys.argv[1]
+caption=sys.argv[2]
 
-results=upload_video(video_url, access_token, ig_user_id)
+results=upload_video(video_url, access_token, ig_user_id, caption)
 print('wait man')
 time.sleep(10)
 

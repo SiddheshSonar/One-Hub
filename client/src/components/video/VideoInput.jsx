@@ -1,15 +1,22 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { toast } from "react-toastify";
 import CancelIcon from '@mui/icons-material/Cancel';
 import { IconButton } from "@mui/material";
 
-export default function VideoInput({ width, height, setVid }) {
+export default function VideoInput({ width, height, setVid, vid }) {
     //   const { width, height } = props;
     const [video, setVideo] = useState(null);
 
     const inputRef = useRef();
 
     const [source, setSource] = useState();
+
+    useEffect(() => {
+        if (!vid) {
+            setSource(null)
+            setVideo(null)
+        }
+    }, [vid])
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -50,7 +57,7 @@ export default function VideoInput({ width, height, setVid }) {
                 accept=".mov,.mp4"
             />
             {/* {!source &&  */}
-            <div className="w-full flex items-center justify-center mb-8">
+            <div className="w-full flex items-center justify-center mb-4">
                 <button className="border p-2 rounded-full bg-cobalt hover:bg-d-blue active:bg-blue text-white" onClick={handleChoose}>Choose Video</button>
             </div>
             {source && (

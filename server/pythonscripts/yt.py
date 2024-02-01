@@ -43,7 +43,7 @@ RETRIABLE_STATUS_CODES = [500, 502, 503, 504]
 #   https://developers.google.com/youtube/v3/guides/authentication
 # For more information about the client_secrets.json file format, see:
 #   https://developers.google.com/api-client-library/python/guide/aaa_client_secrets
-CLIENT_SECRETS_FILE = "client_secrets.json"
+CLIENT_SECRETS_FILE = "client_secret2.json"
 
 # This OAuth 2.0 access scope allows an application to upload files to the
 # authenticated user's YouTube channel, but doesn't allow other types of access.
@@ -164,15 +164,13 @@ def resumable_upload(insert_request):
 
 
 if __name__ == '__main__':
-    accessToken, title, description, privacy, category, tags, video_path = sys.argv[1:8]
+    accessToken, title, description, privacy, video_path = sys.argv[1:6]
     print("accessToken: " + accessToken)
     print("title: " + title)
     print("description: " + description)
     print("privacy: " + privacy)
-    print("category: " + category)
-    print("tags: " + tags)
     print("video_path: " + video_path)
-    sys.argv = [sys.argv[0], "--file=" + video_path, "--title=" + title, "--description=" + description, "--category=" + category, "--keywords=" + tags, "--privacyStatus=" + privacy]
+    sys.argv = [sys.argv[0], "--file=" + video_path, "--title=" + title, "--description=" + description,  "--privacyStatus=" + privacy]
     print(sys.argv)
     argparser.add_argument("--file", required=True, help="Video file to upload")
     argparser.add_argument("--title", help="Video title", default="Test Title")

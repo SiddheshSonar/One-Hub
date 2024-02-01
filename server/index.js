@@ -51,7 +51,7 @@ const upload = multer({ storage });
 bR.post("/upload/youtube", upload.single('video'), async (req, res) => {
   try {
     // console.log(req.body); 
-    const { title, description, email } = req.body;
+    const { title, description, privacy, email } = req.body;
     const video = req.file;
     // console.log(req.body)
     // console.log(video)
@@ -70,6 +70,7 @@ bR.post("/upload/youtube", upload.single('video'), async (req, res) => {
       accessToken,
       title,
       description,
+      privacy,
       // video.path // Assuming video.path is the correct path to the video file
       video_path
     ]);
@@ -130,6 +131,114 @@ bR.post("/upload/youtube", upload.single('video'), async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 })
+
+// multer for insta
+const storage1 = multer.diskStorage({
+  destination: function (req, file, cb) {
+    return cb(null, "./static")
+  },
+  filename: function (req, file, cb) {
+    const name = file.originalname.split('.');
+    // const ext = name[name.length - 1];
+    return cb(null, `${file.fieldname}-${Date.now()}.mp4`)
+  }
+})
+
+const upload1 = multer({ storage: storage1 });
+
+// Upload on instagram
+bR.post("/upload/instagram", upload1.single('video'), async (req, res) => {
+  try {
+    const { email, caption } = req.body;
+    const vid = req.file;
+    console.log(vid)
+    if (!vid) {
+      return res.status(400).json({ message: 'No video file provided' });
+    }
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: "User does not exist!" });
+    const video = vid.filename;
+    // const video_url = `http://localhost:5000/static/${video}`
+    const video_url =  'https://media.publit.io/file/sample-5s-X.mp4'
+    console.log(video_url)
+    const pythonProcess = spawn('python', [
+      "./pythonscripts/instavid.py",
+      video_url,
+      caption,
+      email
+    ]);
+    pythonProcess.stdout.on('data', (data) => {
+      console.log(data.toString());
+    });
+    pythonProcess.stderr.on('data', (data) => {
+      console.log(data.toString());
+    }
+    );
+    res.json({ message: 'Video uploaded successfully!' });
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: "Internal Server Error" })
+  }
+});
+
+// Upload on both 
+
+bR.post("/upload/both", upload.single('video'), async (req, res) => {
+  try {
+    const { title, description, privacy, email, caption } = req.body;
+    const vid = req.file;
+    console.log(vid)
+    if (!vid) {
+      return res.status(400).json({ message: 'No video file provided' });
+    }
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: "User does not exist!" });
+    const accessToken = user.socials[2].token;
+    const video = vid.filename;
+    // const video_url = `http://localhost:5000/static/${video}`
+    const video_url =  'https://media.publit.io/file/sample-5s-X.mp4'
+    console.log(video_url)
+    const pythonProcess = spawn('python', [
+      "./pythonscripts/instavid.py",
+      video_url,
+      caption,
+      email
+    ]);
+    pythonProcess.stdout.on('data', (data) => {
+      console.log(data.toString());
+    });
+    pythonProcess.stderr.on('data', (data) => {
+      console.log(data.toString());
+    }
+    );
+    // Your existing code here...
+
+    const video_path = vid.path;
+    const pythonProcess1 = spawn('python', [
+      "./pythonscripts/yt.py",
+      accessToken,
+      title,
+      description,
+      privacy,
+      // video.path // Assuming video.path is the correct path to the video file
+      video_path
+    ]);
+
+    // Rest of your existing code...
+
+    pythonProcess1.stdout.on('data', (data) => {
+      console.log(data.toString());
+    });
+    pythonProcess1.stderr.on('data', (data) => {
+      console.log(data.toString());
+    }
+    );
+    res.json({ message: 'Video uploaded successfully!' });
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: "Internal Server Error" })
+  }
+});
 
 // start server
 const PORT = process.env.PORT || 5001;
